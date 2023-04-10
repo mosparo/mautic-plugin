@@ -1,12 +1,13 @@
 {
   "name": "mosparo/mautic-integration-bundle",
   "description": "This plugin adds the required form field to Mautic to protect your forms with mosparo.",
+  "keywords": ["mosparo", "mautic", "integration", "plugin", "bundle"],
   "type": "mautic-plugin",
   "license": "MIT",
   "authors": [
     {
       "name": "mosparo",
-      "email": "info@mosparo.io"
+      "homepage": "https://mosparo.io"
     }
   ],
   "require": {
