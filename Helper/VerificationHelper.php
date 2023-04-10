@@ -115,7 +115,7 @@ class VerificationHelper
         // Let other plugins filter the lists of ignored and verifiable field types
         if ($this->eventDispatcher->hasListeners(FilterFieldTypesEvent::class)) {
             $filterFieldTypesEvent = new FilterFieldTypesEvent($ignoredFieldTypes, $verifiableFieldTypes);
-            $this->eventDispatcher->dispatch($filterFieldTypesEvent);
+            $filterFieldTypesEvent = $this->eventDispatcher->dispatch($filterFieldTypesEvent);
 
             $ignoredFieldTypes = $filterFieldTypesEvent->getIgnoredFieldTypes();
             $verifiableFieldTypes = $filterFieldTypesEvent->getVerifiableFieldTypes();
