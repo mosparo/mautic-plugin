@@ -18,10 +18,7 @@ final class MosparoIntegrationFieldTypeTest extends TestCase
             ->expects($this->exactly(2))
             ->method('add')
             ->willReturnCallback(function ($name, $type, $args) {
-                match ([$name, $type]) {
-                    ['useDefaultConnection', YesNoButtonGroupType::class] => 'useDefaultConnection',
-                    ['connection', MosparoIntegrationConnectionType::class] => 'connection',
-                };
+                $this->match($name, $type);
             });
 
         $type = new MosparoIntegrationFieldType();
@@ -45,5 +42,21 @@ final class MosparoIntegrationFieldTypeTest extends TestCase
         $type = new MosparoIntegrationFieldType();
 
         $this->assertEquals('mosparo-integration', $type->getBlockPrefix());
+    }
+
+    protected function match($name, $type)
+    {
+        $options = [
+            ['useDefaultConnection', YesNoButtonGroupType::class],
+            ['connection', MosparoIntegrationConnectionType::class],
+        ];
+
+        foreach ($options as $option) {
+            if ($name === $option[0] && $type === $option[1]) {
+                return true;
+            }
+        }
+
+        throw new \Exception('Arguments not matching');
     }
 }

@@ -22,13 +22,7 @@ final class MosparoIntegrationConnectionTypeTest extends TestCase
             ->expects($this->exactly(5))
             ->method('add')
             ->willReturnCallback(function ($name, $type, $args) {
-                match ([$name, $type]) {
-                    ['host', UrlType::class] => 'host',
-                    ['uuid', TextType::class] => 'uuid',
-                    ['publicKey', TextType::class] => 'publicKey',
-                    ['privateKey', PasswordType::class] => 'privateKey',
-                    ['verifySsl', YesNoButtonGroupType::class] => 'verifySsl'
-                };
+                $this->match($name, $type);
             });
 
         $type = new MosparoIntegrationConnectionType();
@@ -42,13 +36,7 @@ final class MosparoIntegrationConnectionTypeTest extends TestCase
             ->expects($this->exactly(5))
             ->method('add')
             ->willReturnCallback(function ($name, $type, $args) {
-                match ([$name, $type]) {
-                    ['host', UrlType::class] => 'host',
-                    ['uuid', TextType::class] => 'uuid',
-                    ['publicKey', TextType::class] => 'publicKey',
-                    ['privateKey', PasswordType::class] => 'privateKey',
-                    ['verifySsl', YesNoButtonGroupType::class] => 'verifySsl'
-                };
+                $this->match($name, $type);
             });
 
         $configuration = $this->createMock(Integration::class);
@@ -84,5 +72,24 @@ final class MosparoIntegrationConnectionTypeTest extends TestCase
         $type = new MosparoIntegrationConnectionType();
 
         $this->assertEquals('mosparo-integration', $type->getBlockPrefix());
+    }
+
+    protected function match($name, $type)
+    {
+        $options = [
+            ['host', UrlType::class],
+            ['uuid', TextType::class],
+            ['publicKey', TextType::class],
+            ['privateKey', PasswordType::class],
+            ['verifySsl', YesNoButtonGroupType::class],
+        ];
+
+        foreach ($options as $option) {
+            if ($name === $option[0] && $type === $option[1]) {
+                return true;
+            }
+        }
+
+        throw new \Exception('Arguments not matching');
     }
 }

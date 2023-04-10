@@ -54,14 +54,6 @@ class VerificationHelper
         }
 
         // Verify the submission
-        /*$client = new Client(
-            $connection['host'],
-            $connection['publicKey'],
-            $connection['privateKey'],
-            [
-                'verify' => $connection['verifySsl'],
-            ]
-        );*/
         $client = $this->clientHelper->getClient(
             $connection['host'],
             $connection['publicKey'],
