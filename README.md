@@ -17,7 +17,7 @@ The Mautic plugin adds the functionality to protect your forms in Mautic with mo
 
 ## Requirements
 To use the plugin, you must meet the following requirements:
-- A mosparo project
+- A mosparo installation (v0.3.14 or newer)
 - A Mautic installation (v4.4 or newer)
 - Access to the files of your Mautic installation
 
