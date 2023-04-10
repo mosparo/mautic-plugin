@@ -1,0 +1,35 @@
+{
+  "name": "mosparo/mautic-integration-bundle",
+  "description": "This plugin adds the required form field to Mautic to protect your forms with mosparo.",
+  "type": "mautic-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "mosparo",
+      "email": "info@mosparo.io"
+    }
+  ],
+  "require": {
+    "mautic/composer-plugin": "^1.0",
+    "mosparo/php-api-client": "^1.0"
+  },
+  "replace": {
+    "guzzlehttp/guzzle": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10"
+  },
+  "autoload": {
+    "psr-4": {
+      "MauticPlugin\\MosparoIntegrationBundle\\": "."
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MauticPlugin\\MosparoIntegrationBundle\\Tests\\": "Tests/"
+    }
+  },
+  "extra": {
+    "install-directory-name": "MosparoIntegrationBundle"
+  }
+}
