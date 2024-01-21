@@ -11,8 +11,9 @@
     }
   ],
   "require": {
-    "mautic/composer-plugin": "^1.0",
-    "mosparo/php-api-client": "^1.0"
+    "php": ">=7.4.0 <8.1",
+    "mautic/core-lib": "^5.0"
+    "mosparo/php-api-client": "^1.1"
   },
   "replace": {
     "guzzlehttp/guzzle": "*"
@@ -31,6 +32,7 @@
     }
   },
   "extra": {
-    "install-directory-name": "MosparoIntegrationBundle"
+    "install-directory-name": "MosparoIntegrationBundle",
+    "display-name": "mosparo Integration Bundle"
   }
 }
