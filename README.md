@@ -29,16 +29,33 @@ To use the plugin, you must meet the following requirements:
 - A Mautic installation (v5.0 or newer)
 
 ## Installation
+
 To use the plugin, please follow these installation instructions:
+
+### With the .zip package
+
+1. Download the package from the releases page
+2. Extract the package
+3. Upload the directory `MosparoIntegrationBundle` into the `plugins` directory of your Mautic installation
+4. Clear the cache by executing `php app/console cache:clear --env=prod` in the root of the Mautic installation **or** delete the directory `var/cache/prod`
+5. Log into Mautic and go to the plugin management page
+6. Click the button `Install/Upgrade Plugins` in the top right corner
+7. Click on the `mosparo Integration` icon in the list of available plugins
+8. Set the flag `Plugin must be enabled and authorized for this field to work` to `Yes`
+9. Enter the mosparo connection details to your mosparo project below
+10. Click `Save`
+
+### With composer
 
 1. Open a terminal and change into the root of the Mautic installation
 2. Execute `composer require mosparo/mautic-integration-bundle:^1.0`
-3. Log into Mautic and go to the plugin management page
-4. Click the button `Install/Upgrade Plugins` in the top right corner
-5. Click on the `mosparo Integration` icon in the list of available plugins
-6. Set the flag `Plugin must be enabled and authorized for this field to work` to `Yes`
-7. Enter the mosparo connection details to your mosparo project below
-8. Click `Save`
+3. Clear the cache by executing `php app/console cache:clear --env=prod` in the root of the Mautic installation **or** delete the directory `var/cache/prod`
+4. Log into Mautic and go to the plugin management page
+5. Click the button `Install/Upgrade Plugins` in the top right corner
+6. Click on the `mosparo Integration` icon in the list of available plugins
+7. Set the flag `Plugin must be enabled and authorized for this field to work` to `Yes`
+8. Enter the mosparo connection details to your mosparo project below
+9. Click `Save`
 
 ## Usage
 
