@@ -4,6 +4,7 @@ namespace Form\Type;
 
 use Mautic\CoreBundle\Form\Type\YesNoButtonGroupType;
 use Mautic\PluginBundle\Entity\Integration;
+use MauticPlugin\MosparoIntegrationBundle\Form\Type\MosparoHelperType;
 use MauticPlugin\MosparoIntegrationBundle\Form\Type\MosparoIntegrationConnectionType;
 use MauticPlugin\MosparoIntegrationBundle\Integration\MosparoIntegrationIntegration;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +20,7 @@ final class MosparoIntegrationConnectionTypeTest extends TestCase
     {
         $builder = $this->createMock(FormBuilder::class);
         $builder
-            ->expects($this->exactly(5))
+            ->expects($this->exactly(6))
             ->method('add')
             ->willReturnCallback(function ($name, $type, $args) {
                 $this->match($name, $type);
@@ -33,7 +34,7 @@ final class MosparoIntegrationConnectionTypeTest extends TestCase
     {
         $builder = $this->createMock(FormBuilder::class);
         $builder
-            ->expects($this->exactly(5))
+            ->expects($this->exactly(6))
             ->method('add')
             ->willReturnCallback(function ($name, $type, $args) {
                 $this->match($name, $type);
@@ -77,6 +78,7 @@ final class MosparoIntegrationConnectionTypeTest extends TestCase
     protected function match($name, $type)
     {
         $options = [
+            ['howToUse', MosparoHelperType::class],
             ['host', UrlType::class],
             ['uuid', TextType::class],
             ['publicKey', TextType::class],
