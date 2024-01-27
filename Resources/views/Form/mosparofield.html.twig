@@ -1,0 +1,111 @@
+{% set containerType = 'hidden' %}
+{% set defaultInputClass = inputClass|default('input') %}
+
+{# start: field_helper #}
+{% set defaultInputFormClass = defaultInputFormClass|default('') %}
+{% set defaultLabelClass = defaultLabelClass|default('label') %}
+{% set formName = formName|default('') %}
+{% set defaultInputClass = 'mauticform-' ~ defaultInputClass %}
+{% set defaultLabelClass = 'mauticform-' ~ defaultLabelClass %}
+{% set containerClass = containerClass|default(containerType) %}
+{% set order = field.order|default(0) %}
+{% set validationMessage = '' %}
+
+{% set inputAttributes = htmlAttributesStringToArray(field.inputAttributes|default('')) %}
+{% set labelAttributes = htmlAttributesStringToArray(field.labelAttributes|default('')) %}
+{% set containerAttributes = htmlAttributesStringToArray(field.containerAttributes|default('')) %}
+
+{# Label and input #}
+{% if inForm is defined and (true == inForm or inForm is not empty) %}
+    {% set labelAttributes = labelAttributes|merge({
+        'class': labelAttributes.class|default([])|merge([defaultLabelClass]),
+    }) %}
+{% else %}
+    {% set labelAttributes = labelAttributes|merge({
+        'class': labelAttributes.class|default([])|merge([defaultLabelClass]),
+    }) %}
+{% endif %}
+
+{# Container #}
+{% set containerAttributes = containerAttributes|merge({
+    'id': 'mauticform' ~ formName|default('') ~ '_' ~ id,
+    'class': containerAttributes.class|default([])|merge([
+        'mauticform-row',
+        'mauticform-' ~ containerClass,
+        'mauticform-field-' ~ order,
+    ]),
+}) %}
+{% if field.parent and fields[field.parent] is defined %}
+    {% set values = field.conditions.values|join('|') %}
+
+    {% if field.conditions.any != false and 'notIn' != field.conditions.expr %}
+        {% set values = '*' %}
+    {% endif %}
+
+    {% set containerAttributes = containerAttributes|merge({
+        'data-mautic-form-show-on': fields[field.parent].alias ~ ':' ~ values,
+        'data-mautic-form-expr': field.conditions.expr,
+        'class': containerAttributes.class|merge([
+            'mauticform-field-hidden',
+        ]),
+    }) %}
+{% endif %}
+
+{% if field.properties.useDefaultConnection is defined and not field.properties.useDefaultConnection %}
+    {% set connection = field.properties.connection %}
+{% else %}
+    {% set connection = field.customParameters.globalConnection %}
+{% endif %}
+
+{% set fieldName = md5(formName) %}
+
+{% set designMode = 'false' %}
+{% if inBuilder %}
+    {% set designMode = 'true' %}
+{% endif %}
+
+<div {% for attrName, attrValue in containerAttributes %}{{ attrName }}="{% if attrValue is iterable %}{{ attrValue|join(' ') }}{% else %}{{ attrValue }}{% endif %}"{% endfor %}>
+    {% if field.showLabel %}<label {% for attrName, attrValue in labelAttributes %}{{ attrName }}="{% if attrValue is iterable %}{{ attrValue|join(' ') }}{% else %}{{ attrValue }}{% endif %}"{% endfor %}>{{ field.label }}</label>{% endif %}
+
+    {% if field.helpMessage is not empty %}<span class="mauticform-helpmessage">{{ field.helpMessage|purify }}</span>{% endif %}
+
+    <div id="mosparo-box-{{ fieldName }}"></div>
+
+    <input type="hidden" {% for attrName, attrValue in inputAttributes %}{{ attrName }}="{% if attrValue is iterable %}{{ attrValue|join(' ') }}{% else %}{{ attrValue }}{% endif %}"{% endfor %} />
+    <span class="mauticform-errormsg" style="display:none;">{{ validationMessage }}</span>
+
+    <script type="text/javascript">
+        function initializeMosparo{{ fieldName }}()
+        {
+            new mosparo('mosparo-box-{{ fieldName }}', '{{ connection.host }}', '{{ connection.uuid }}', '{{ connection.publicKey }}', {
+                loadCssResource: true,
+                designMode: {{ designMode }}
+            });
+        }
+
+        function loadMosparo{{ fieldName }}() {
+            if (document.getElementById('mosparo-js-{{ fieldName }}') === null) {
+                let head = document.getElementsByTagName('head')[0];
+
+                let mosparoJs = document.createElement('script');
+                mosparoJs.id = 'mosparo-js-{{ fieldName }}';
+                mosparoJs.type = 'text/javascript';
+                mosparoJs.src = '{{ connection.host }}/build/mosparo-frontend.js';
+                mosparoJs.onload = function() {
+                    initializeMosparo{{ fieldName }}();
+                };
+
+                head.appendChild(mosparoJs);
+            } else {
+                initializeMosparo{{ fieldName }}();
+            }
+        }
+
+        if (typeof mosparo !== 'undefined') {
+            initializeMosparo{{ fieldName }}();
+        } else {
+            loadMosparo{{ fieldName }}();
+        }
+    </script>
+</div>
+

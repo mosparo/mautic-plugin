@@ -43,7 +43,7 @@ class FormSubscriber implements EventSubscriberInterface
             [
                 'label'    => 'mautic.mosparointegration.formfield.mosparofield',
                 'formType' => MosparoIntegrationFieldType::class,
-                'template' => 'MosparoIntegrationBundle:Form:mosparofield.html.php',
+                'template' => '@MosparoIntegration/Form/mosparofield.html.twig',
                 'builderOptions' => [
                     'addHelpMessage' => true,
                     'addShowLabel' => true,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.0/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="Tests/bootstrap.php">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.0/phpunit.xsd" backupGlobals="false" colors="true">
     <php>
         <ini name="display_errors" value="1"/>
         <ini name="error_reporting" value="-1"/>
@@ -18,5 +18,9 @@
             <directory suffix=".php">Helper</directory>
             <directory suffix=".php">Integration</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">Config</directory>
+            <directory suffix=".php">Tests</directory>
+        </exclude>
     </coverage>
 </phpunit>

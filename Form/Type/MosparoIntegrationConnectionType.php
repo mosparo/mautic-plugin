@@ -23,6 +23,16 @@ class MosparoIntegrationConnectionType extends AbstractType
         }
 
         $builder->add(
+            'howToUse',
+            MosparoHelperType::class,
+            [
+                'label' => false,
+                'html' => 'mautic.mosparointegration.connection.howToUse',
+                'required' => false,
+            ]
+        );
+
+        $builder->add(
             'host',
             UrlType::class,
             [

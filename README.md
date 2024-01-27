@@ -13,15 +13,23 @@
 -----
 
 ## Description
+
 The Mautic plugin adds the functionality to protect your forms in Mautic with mosparo. mosparo can filter spam submissions before they get processed by Mautic.
 
+## How to use
+
+Please see our [How to use](https://mosparo.io/how-to-use/) introduction on our website to learn how to use mosparo in your form.
+
+In step 3 of the how-to-use explanation, you must integrate mosparo into your Mautic installation. Please follow the [Installation](#installation) part below for this process.
+
 ## Requirements
+
 To use the plugin, you must meet the following requirements:
-- A mosparo installation (v0.3.14 or newer)
-- A Mautic installation (v4.4 or newer)
-- Access to the files of your Mautic installation
+- A mosparo installation (v1.0 or newer)
+- A Mautic installation (v5.0 or newer)
 
 ## Installation
+
 To use the plugin, please follow these installation instructions:
 
 ### With the .zip package
@@ -41,13 +49,13 @@ To use the plugin, please follow these installation instructions:
 
 1. Open a terminal and change into the root of the Mautic installation
 2. Execute `composer require mosparo/mautic-integration-bundle:^1.0`
-3. Log into Mautic and go to the plugin management page
-4. Click the button `Install/Upgrade Plugins` in the top right corner
-5. Click on the `mosparo Integration` icon in the list of available plugins
-6. Set the flag `Plugin must be enabled and authorized for this field to work` to `Yes`
-7. Enter the mosparo connection details to your mosparo project below
-8. Click `Save`
-
+3. Clear the cache by executing `php app/console cache:clear --env=prod` in the root of the Mautic installation **or** delete the directory `var/cache/prod`
+4. Log into Mautic and go to the plugin management page
+5. Click the button `Install/Upgrade Plugins` in the top right corner
+6. Click on the `mosparo Integration` icon in the list of available plugins
+7. Set the flag `Plugin must be enabled and authorized for this field to work` to `Yes`
+8. Enter the mosparo connection details to your mosparo project below
+9. Click `Save`
 
 ## Usage
 

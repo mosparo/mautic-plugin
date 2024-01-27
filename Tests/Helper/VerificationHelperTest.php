@@ -330,6 +330,8 @@ final class VerificationHelperTest extends TestCase
             ->willReturnCallback(function (FilterFieldTypesEvent $event) {
                 $event->setIgnoredFieldTypes([]);
                 $event->setVerifiableFieldTypes(array_merge($event->getVerifiableFieldTypes(), ['password']));
+
+                return $event;
             });
 
         $verificationResult = new VerificationResult(true, true, ['mauticform[first_name]' => 'valid', 'mauticform[last_name]' => 'valid'], []);
