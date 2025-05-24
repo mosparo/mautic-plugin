@@ -11,8 +11,7 @@
     }
   ],
   "require": {
-    "php": ">=7.4.0 <8.1",
-    "mautic/core-lib": "^5.0",
+    "mautic/core-lib": "^6.0",
     "mosparo/php-api-client": "^1.1"
   },
   "require-dev": {
