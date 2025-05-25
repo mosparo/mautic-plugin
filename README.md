@@ -28,6 +28,13 @@ To use the plugin, you must meet the following requirements:
 - A mosparo installation (v1.0 or newer)
 - A Mautic installation (v5.0 or newer)
 
+### Compatibility
+
+| mosparo Plugin version | Mautic version |
+|------------------------|----------------|
+| v1.x                   | v5.x           |
+| v2.x                   | v6.x           |
+
 ## Installation
 
 To use the plugin, please follow these installation instructions:
