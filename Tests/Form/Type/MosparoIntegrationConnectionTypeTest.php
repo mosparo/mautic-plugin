@@ -22,8 +22,10 @@ final class MosparoIntegrationConnectionTypeTest extends TestCase
         $builder
             ->expects($this->exactly(6))
             ->method('add')
-            ->willReturnCallback(function ($name, $type, $args) {
+            ->willReturnCallback(function ($name, $type, $args) use ($builder) {
                 $this->match($name, $type);
+
+                return $builder;
             });
 
         $type = new MosparoIntegrationConnectionType();
@@ -36,8 +38,10 @@ final class MosparoIntegrationConnectionTypeTest extends TestCase
         $builder
             ->expects($this->exactly(6))
             ->method('add')
-            ->willReturnCallback(function ($name, $type, $args) {
+            ->willReturnCallback(function ($name, $type, $args) use ($builder) {
                 $this->match($name, $type);
+
+                return $builder;
             });
 
         $configuration = $this->createMock(Integration::class);

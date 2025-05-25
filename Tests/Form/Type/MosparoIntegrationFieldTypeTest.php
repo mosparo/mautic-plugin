@@ -17,8 +17,10 @@ final class MosparoIntegrationFieldTypeTest extends TestCase
         $builder
             ->expects($this->exactly(2))
             ->method('add')
-            ->willReturnCallback(function ($name, $type, $args) {
+            ->willReturnCallback(function ($name, $type, $args) use ($builder) {
                 $this->match($name, $type);
+
+                return $builder;
             });
 
         $type = new MosparoIntegrationFieldType();
