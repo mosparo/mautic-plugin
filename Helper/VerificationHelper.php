@@ -33,7 +33,7 @@ class VerificationHelper
     {
         $formHelper = new FormHelper();
 
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->requestStack->getMainRequest();
         $data = $request->request->all();
         $field = $event->getField();
         $form = $field->getForm();

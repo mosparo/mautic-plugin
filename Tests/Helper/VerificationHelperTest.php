@@ -72,7 +72,7 @@ final class VerificationHelperTest extends TestCase
 
         $this->requestStack
             ->expects($this->once())
-            ->method('getMasterRequest')
+            ->method('getMainRequest')
             ->willReturn($this->request);
 
         $this->fields = new ArrayCollection();
